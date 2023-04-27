@@ -74,7 +74,7 @@ def recursive_objectify(nested_dict, make_immutable=True):
     "Turns a nested_dict into a nested AttributeDict"
     result = deepcopy(nested_dict)
     for k, v in result.items():
-        if isinstance(v, collections.Mapping):
+        if isinstance(v, collections.abc.Mapping):
             result = dict(result)
             result[k] = recursive_objectify(v, make_immutable)
     if make_immutable:
@@ -95,7 +95,7 @@ def update_recursive(d, u, overwrite=False):
             elif raw_key in d:  # keep original list
                 pass
             else:  # key does not exist yet, append
-                d[k] = v 
+                d[k] = v
         elif k not in d or overwrite:
             d[k] = v
     return d
